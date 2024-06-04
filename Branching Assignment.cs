@@ -44,8 +44,8 @@ namespace PackageExpress
             // Calculate Total package
             double product = width * height * length;
             double Total_Package  = (product * weight) / 100;
+            Console.WriteLine($"Your shipping quote is ${ Total_Package:F2}");
 
-            Console.WriteLine("Your shipping Amount is " + "$" + Total_Package );
         }
     }
 }
