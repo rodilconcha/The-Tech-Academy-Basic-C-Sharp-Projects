@@ -1,53 +1,39 @@
 ﻿
-
-
 using System;
 
-namespace PackageExpress
+class Employee
 {
-    class Program
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    // Overload the equality operator
+    public static bool operator ==(Employee emp1, Employee emp2)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Welcome to Package Express!!!!!");
+        if (ReferenceEquals(emp1, emp2))
+            return true;
 
-            // Prompt for Package Weight
-            Console.Write("Enter the Package Weight:");
-            double weight = double.Parse(Console.ReadLine());
+        if (emp1 is null || emp2 is null)
+            return false;
 
-            // Check if weight exceeds 50
-            if (weight > 50)
-            {
-                Console.WriteLine("Package too heavy to be shipped via Package Express");
-                return;
-            }
+        return emp1.Id == emp2.Id;
+    }
 
-            // Prompt for package dimensions
-            Console.Write("Enter the Package Width ");
-            double width = double.Parse(Console.ReadLine());
+    public static bool operator !=(Employee emp1, Employee emp2)
+    {
+        return !(emp1 == emp2);
+    }
+}
 
-            Console.Write("Enter the Package Height: ");
-            double height = double.Parse(Console.ReadLine());
+class Program
+{
+    static void Main()
+    {
+        // Instantiate two Employee objects
+        Employee emp1 = new Employee { Id = 1, FirstName = "George", LastName = "Flamming" };
+        Employee emp2 = new Employee { Id = 2, FirstName = "James", LastName = "Bond" };
 
-            Console.Write("Enter the Package Length:  ");
-            double length = double.Parse(Console.ReadLine());
-
-            // Calculate total dimensions
-            double totalDimensions = width + height + length;
-
-            // Check if dimensions exceed 50
-            if (totalDimensions > 50)
-            {
-                Console.WriteLine("Package too big to be shipped via Package Express!!!!.");
-                return;
-            }
-
-            // Calculate Total package
-            double product = width * height * length;
-            double Total_Package = (product * weight) / 100;
-
-            Console.WriteLine("Your shipping Total Amount is: " + "$" + Total_Package);
-
-        }
+        // Compare using overloaded operators
+        Console.WriteLine($"They Are emp1 and emp2 equal?  {emp1 == emp2}");
     }
 }
